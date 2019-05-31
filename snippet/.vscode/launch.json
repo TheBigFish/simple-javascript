@@ -4,7 +4,7 @@
             "name": "Launch",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/promise/promise-polyfill-test.js",
+            "program": "${workspaceRoot}/Object..create.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",

@@ -28,6 +28,7 @@ function Promise(fn) {
     /** @type {Promise|undefined} */
     this._value = undefined;
     /** @type {!Array<!Function>} */
+    // _deferreds 存储延迟处理对象
     this._deferreds = [];
 
     // 执行当前 Promise 传入的程序
@@ -129,7 +130,9 @@ function resolve(self, newValue) {
                 // 兼容类 Promise 对象的处理方式，对其 then 方法继续执行 doResolve
                 // 相当于调用 newValue.then()
                 // resolve 为解决这个 promise，可以提供三类值
-                // 1. 值 2. promise 对象 3. 含有 then 方法的对象或者函数（then 方法内部可能调用 resolve 或者 reject）
+                // 1. 值 
+                // 2. promise 对象 
+                // 3. 含有 then 方法的对象或者函数（then 方法内部可能调用 resolve 或者 reject）
                 // 针对3， 则以当前 promise 调用一次 newValue 的 resolve。
                 // 
                 doResolve(bind(then, newValue), self);
@@ -218,7 +221,7 @@ function doResolve(fn, self) {
             }
         );
     } catch (ex) {
-        //执行时抛出异常，reject 该 promise
+        //执行时抛出异常，以该异常 reject 该 promise
         if (done) return;
         done = true;
         reject(self, ex);
