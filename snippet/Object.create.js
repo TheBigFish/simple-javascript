@@ -79,7 +79,6 @@ function Shape() {
 }
 
 
-console.log(Shape.prototype.__proto__);
 // 父类的方法
 Shape.prototype.move = function(x, y) {
     this.x += x;
@@ -93,7 +92,9 @@ function Rectangle() {
 }
   
 // 子类续承父类
+
 Rectangle.prototype = Object.create(Shape.prototype);
+console.log(Rectangle.prototype.__proto__ === Shape.prototype);
 Rectangle.prototype.constructor = Rectangle;
   
 var rect = new Rectangle();
